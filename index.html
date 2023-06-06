@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+<title>AR panorama viewer</title>
+</head><body>
+<script src="https://code4fukui.github.io/aframe/dist/aframe-master.min.js"></script>
+<script src="a-frame-shadow-casting/index.js"></script><!-- https://github.com/haf-decent/aframe-shadow-casting -->
+<a-scene>
+<a-cylinder
+  side="double"
+  position="0 1.5 0"
+  src="./panorama-asakura-flip.jpg"
+  theta-start="40"
+  theta-length="280"
+  open-ended="true"
+  height="1.4"
+  radius="1.5"
+  shadow="cast: true; receive: false"
+></a-cylinder>
+<!--<a-light type="directional" color="#fff" position="1 1 1"></a-light>-->
+<a-light type="ambient" color="#fff"></a-light>
+<a-entity light="type:directional; castShadow:true;" position="0 3 .1"></a-entity>
+<!--
+<a-plane shadow="receive: true; cast: true" height="10" width="10" color="#f8f800" opacity=".3" rotation="-90 0 0"></a-plane>
+-->
+
+
+<!--
+<a-shadow-light
+    id="spot-light-primitive"
+    type="spot"
+    mapsize="2048 2048"
+    far="10">
+</a-shadow-light>
+
+<a-entity
+  id="directional-light-entity"
+  shadow-light="type: directional; intensity: 0.8; helper: true;"
+  position="1 5 0">
+</a-entity>
+-->
+<a-shadow-plane
+    id="shadow-plane-primitive"
+    dimensions="10 10">
+</a-shadow-plane>
+<!--
+<a-entity
+  id="shadow-plane-entity"
+  shadow-plane="opacity: 0.4">
+</a-entity>
+-->
+</a-scene>
+
+</body></html>
