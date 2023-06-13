@@ -1,5 +1,19 @@
 # ar-panorama-viewer
- 
+
+## usage
+
+### demo
+
+- https://code4fukui.github.io/ar-panorama-viewer/
+
+### with src
+
+- https://code4fukui.github.io/ar-panorama-viewer/?src=panorama-asakura-flip.jpg
+
+### with option
+
+- https://code4fukui.github.io/ar-panorama-viewer/?src=panorama-asakura-flip.jpg&tlen=340&h=3&r=3
+
 ## option
 
 ```js
