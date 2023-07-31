@@ -5,7 +5,7 @@
 ### demo
 
 - https://code4fukui.github.io/ar-panorama-viewer/
-- https://code4fukui.github.io/ar-panorama-viewer/?src=panorama-tojinbo-flip.jpg&tlen=340&h=3&r=3
+- https://code4fukui.github.io/ar-panorama-viewer/?src=panorama-tojinbo-flip.jpg&tlen=200&h=3&r=3
 
 ### with src
 
