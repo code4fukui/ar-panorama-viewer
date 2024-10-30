@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+<body>
+<script type="module">
+import { THREE, scene, camera, renderer } from "https://code4fukui.github.io/egxr.js/egxr.js";
+
+const param = new URL(location.href).searchParams;
+
+//const url = "https://code4fukui.github.io/ar-panorama-viewer/panorama-tojinbo-flip.jpg";
+const url = param.get("src") ?? "panorama-venturepitch2024-flip.jpg";
+const loader = new THREE.TextureLoader();
+const texture = loader.load(url);
+texture.colorSpace = THREE.SRGBColorSpace;
+
+const pos = new THREE.Group();
+//pos.position.z = -5;
+scene.add(pos);
+
+const r = 2;
+const h = 1.5;
+const seg = 100;
+const th = Math.PI * 1;
+const scale = 1.1;
+const ths = th * scale;
+const geo = new THREE.CylinderGeometry(r * scale, r * scale, h * scale, seg, 1, true, Math.PI + ths / 2, -ths);
+const mat = new THREE.MeshBasicMaterial({
+  //color: 0x00ff00,
+  map: texture,
+});
+const screen = new THREE.Mesh(geo, mat);
+/*
+screen.scale.x = scale;
+screen.scale.y = scale;
+screen.scale.z = scale;
+*/
+pos.add(screen);
+
+const mat2 = new THREE.MeshBasicMaterial({
+  //color: 0xffff00,
+  //depthTest: false,   // 深度テストを無効にする
+  colorWrite: false,    // 背景のオブジェクトを描画しない
+  //transparent: true,  // 透過を有効にする(必要であれば)
+  //opacity: 1,        // 透明度(0で完全に透明、1で不透明)
+});
+const h2 = 2; // 5
+const th2 = Math.PI * 1.2;
+const geo_up = new THREE.CylinderGeometry(r, r, h2, seg, 1, true, Math.PI + th2 / 2, -th2);
+const hide_up = new THREE.Mesh(geo_up, mat2);
+hide_up.position.set(0, (h + h2) / 2, 0);
+pos.add(hide_up);
+
+const geo_down = new THREE.CylinderGeometry(r, r, h2, seg, 1, true, Math.PI + th2 / 2, -th2);
+const hide_down = new THREE.Mesh(geo_down, mat2);
+hide_down.position.set(0, -(h + h2) / 2, 0);
+pos.add(hide_down);
+
+const dth = (Math.PI * 2 - th) / 2;
+const geo_right = new THREE.CylinderGeometry(r, r, h, seg, 1, true, Math.PI + th / 2 + dth, -dth);
+const hide_right = new THREE.Mesh(geo_right, mat2);
+hide_right.position.set(0, 0, 0);
+pos.add(hide_right);
+
+const geo_left = new THREE.CylinderGeometry(r, r, h, seg, 1, true, Math.PI - th / 2, -dth);
+const hide_left = new THREE.Mesh(geo_left, mat2);
+hide_left.position.set(0, 0, 0);
+pos.add(hide_left);
+
+for (const mesh of [hide_up, hide_down, hide_right, hide_left]) {
+  mesh.renderOrder = -1; // 背景のオブジェクトを描画しない
+}
+
+renderer.setAnimationLoop(() => {
+  const t = performance.now() / 1000;
+  renderer.setClearColor(0x000000);
+  renderer.render(scene, camera);
+});
+
+document.body.onkeydown = (e) => {
+  if (e.code == "ArrowUp") {
+      camera.position.z -= .1;
+  } else if (e.code == "ArrowDown") {
+      camera.position.z += .1;
+  } else if (e.code == "ArrowRight") {
+      camera.position.x += .1;
+  } else if (e.code == "ArrowLeft") {
+      camera.position.x -= .1;
+  }
+};
+/*
+document.body.onclick = (e) => {
+    if (e.target.tagName == "CANVAS") {
+        document.body.requestFullscreen();
+        XRButton.style.display = "none";
+    }
+};
+document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) {
+        XRButton.style.display = "block";
+    }
+});
+*/
+</script>
+</body>
+</html>
+

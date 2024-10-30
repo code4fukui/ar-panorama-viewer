@@ -7,6 +7,10 @@
 - https://code4fukui.github.io/ar-panorama-viewer/
 - https://code4fukui.github.io/ar-panorama-viewer/?src=panorama-tojinbo-flip.jpg&tlen=200&h=3&r=3
 
+- https://code4fukui.github.io/ar-panorama-viewer/v2.html
+- https://code4fukui.github.io/ar-panorama-viewer/v2.html?src=panorama-tojinbo-flip.jpg
+
+
 ### with src
 
 - https://code4fukui.github.io/ar-panorama-viewer/?src=panorama-asakura-flip.jpg
